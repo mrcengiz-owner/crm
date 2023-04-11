@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+  {% if  user.is_authenticated %}
+  
+  <h1>Merhaba Hoşgeldin </h1>
+  {% else %}
+<h1>Giriş/Login</h1>
+<br>
+
+<form method="POST" action="{% url 'home' %}">
+  {% csrf_token %}   
+   <div class="mb-3">     
+      <input type="text" class="form-control" name="username" placeholder="Kullanıcı Adınız" required>
+    </div>
+    <br/>
+    <div class="mb-3">  
+      
+      <input type="password" class="form-control" name="password" placeholder="Şifreniz" required>
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-info">Giriş</button>
+</form>
+</div>
+</br>
+{% endif %}
+{%endblock%}

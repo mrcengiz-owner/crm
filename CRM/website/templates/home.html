@@ -2,29 +2,75 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+  {% if user.is_authenticated %}
 
-  {% if  user.is_authenticated %}
+  <h2>Kayıtlar </h2>
+  <div>
+    <table class="table table-striped table-hover table-bordered table-sm">
+      <caption>
+        Toplam kayit sayisi:
+      </br>
+    </br>
+  </br>
+</br>
+</br>
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">İsim</th>
+          <th scope="col">Soyisim</th>
+          <th scope="col">İl</th>
+          <th scope="col">İlce</th>
+          <th scope="col">Posta Kodu</th>
+          <th scope="col">E-Posta Adres</th>
+          <th scope="col">Telefon</th>
+          <th scope="col">Oluşturma Tarihi</th>
+      </thead>
+      <tbody>
+
+        {% if kayitlar %}
+        {% for kayit in kayitlar %}
+        <tr>
+          <td>{{kayit.id}}</td>
+          <td><a href="{% url 'Record' kayit.id %}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"> {{kayit.isim}}</a>
+           </td>
+          <td>{{kayit.soyisim}}</td>
+          <td>{{kayit.il}}</td>
+          <td>{{kayit.ilce}}</td>
+          <td>{{kayit.postakod}}</td>
+          <td>{{kayit.email}}</td>
+          <td>{{kayit.telefon}}</td>
+          <td>{{kayit.created_at}}</td>
+        
+        </tr>
+        
+        
+        
+        
+        {% endfor %}
+        {% endif %}
+        {% else %}
   
-  <h1>Merhaba Hoşgeldin </h1>
-  {% else %}
-<h1>Giriş/Login</h1>
-<br>
+      </tbody>
+      </tr>
+    </table>
 
-<form method="POST" action="{% url 'home' %}">
-  {% csrf_token %}   
-   <div class="mb-3">     
+  <h1>Giriş/Login</h1>
+  <br>
+
+  <form method="POST" action="{% url 'home' %}">
+    {% csrf_token %}
+    <div class="mb-3">
       <input type="text" class="form-control" name="username" placeholder="Kullanıcı Adınız" required>
     </div>
-    <br/>
-    <div class="mb-3">  
-      
+    <br />
+    <div class="mb-3">
+
       <input type="password" class="form-control" name="password" placeholder="Şifreniz" required>
     </div>
-    <br/>
+    <br />
     <button type="submit" class="btn btn-info">Giriş</button>
-</form>
-</div>
-</br>
-{% endif %}
-{%endblock%}
+  </form>
+  </br>
+  {% endif %}
+  {% endblock %}

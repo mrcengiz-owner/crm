@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Müşteri Kayıt Bölümü</h1>
+
+<div class="card">
+    <div class="card-header">
+        <strong>{{customer_rec.isim}} </strong>
+        <strong>  {{customer_rec.soyisim}}</strong>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+      <strong>İl : </strong>  {{customer_rec.il}} </p>
+      <p class="card-text">
+      <strong>İlçe : </strong> {{customer_rec.ilce}}  </p>
+      <p class="card-text">
+      <strong>Posta Kodu : </strong> {{customer_rec.postakod}}  </p>
+      <p class="card-text">
+      <strong>E-Posta : </strong> {{customer_rec.email}}  </p>
+      <p class="card-text">
+      <strong>Telefon : </strong> {{customer_rec.telefon}}  </p>
+      <p class="card-text">
+      <strong>Oluşturma Tarihi : </strong> {{customer_rec.created_at}}  </p>
+      <p class="card-text">
+      <strong>ID: </strong> {{customer_rec.id}} </p>
+      </p>
+    
+    </div>
+  </div>
+
+</br></br>
+<a href="{% url 'home'%}" class="btn btn-info">Listeye Geri dön<a/>
+<a href="{% url 'sil_mus' customer_rec.id %}" class="btn btn-danger">Sil<a/>
+
+<a href="{% url 'update-mus' customer_rec.id  %}" class="btn btn-primary">Bilgileri Güncelle<a/>
+
+
+           
+       
+
+{% endblock  %}

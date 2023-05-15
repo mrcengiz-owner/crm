@@ -1,25 +1,25 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record
-
+from .models import kayit
 
 
 class KayitFormu(UserCreationForm):
-    email=forms.forms.EmailField(Label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Adresiniz'}))
-    isim=forms.CharField(Label="", max_length=150, widget=forms.TextInput(attrs={'class':'form-control','placeholder':'İsminiz'}))
-    soyisim=forms.CharField(Label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Soyadınız'}))
+    email = forms.EmailField(label="", widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Email Adresiniz'}))
+    first_name = forms.CharField(label="", max_length=150, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'İsminiz'}))
+    last_name = forms.CharField(label="", max_length=100, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Soyadınız'}))
 
     class Meta:
-        model=User
-        fields=('username', 
-                'first_name', 
-                'Last_name',
-                'email',
-                'password1',
-                'password2')
-        
-
+        model = User
+        fields = ('username',
+                  'first_name',
+                  'last_name',
+                  'email',
+                  'password1',
+                  'password2')
 
     def __init__(self, *args, **kwargs):
 
@@ -38,3 +38,28 @@ class KayitFormu(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Şifrenizi tekrarlayın..'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Öncekiyle aynı şifreyi teyit etmek için girin</small></span>'
+
+# müşteri kayıt formu
+
+
+class Muskayitform(forms.ModelForm):
+    isim = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "Müşteri İsmi", "class": "form-control"}), label="")
+    soyisim = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "Müşteri Soyadı", "class": "form-control"}), label="")
+    email = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "Email Adresi", "class": "form-control"}), label="")
+    telefon = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "Telefon Numarası", "class": "form-control"}), label="")
+    adres = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "Adresi", "class": "form-control"}), label="")
+    il = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "İli", "class": "form-control"}), label="")
+    ilce = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "İlçesi", "class": "form-control"}), label="")
+    postakod = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs={"placeholder": "Posta Kodu", "class": "form-control"}), label="")
+
+    class Meta:
+        model = kayit
+        exclude = ("user",)
